@@ -8,5 +8,8 @@ services:
     build:
       context: ../inline-provider
 
+    volumes:
+      - ../inline-provider:/app
+
     ports:
       - "8080:8080"
