@@ -13,3 +13,14 @@ services:
 
     ports:
       - "8080:8080"
+
+  bet-maker:
+    image: bsw-test-bet-maker
+    build:
+      context: ../bet-maker
+
+    volumes:
+      - ../bet-maker:/app
+
+    ports:
+      - "8000:8000"
