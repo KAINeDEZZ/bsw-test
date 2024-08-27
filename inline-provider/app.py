@@ -42,7 +42,7 @@ async def create_event(event: Event):
 
 
 @app.get('/event/{event_id}')
-async def get_event(event_id: str = Path(default=None)):
+async def get_event(event_id: str = Path()):
     if event_id in events:
         return events[event_id]
 
