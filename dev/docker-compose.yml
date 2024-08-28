@@ -22,5 +22,28 @@ services:
     volumes:
       - ../bet-maker:/app
 
+    environment:
+      DB_CONNECTION_STRING: 'postgresql+psycopg2://postgres:dev@db:5432/postgres'
+
+    links:
+      - db
+      - line-provider
+
     ports:
       - "8000:8000"
+
+  db:
+    image: postgres:16
+
+    volumes:
+      - db:/var/lib/postgresql/data
+
+    ports:
+      - "5432:5432"
+
+    environment:
+      POSTGRES_PASSWORD: dev
+
+
+volumes:
+  db:
