@@ -8,6 +8,12 @@ from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
 
+import os
+
+from sqlalchemy import create_engine
+
+engine = create_engine(os.environ['DB_CONNECTION_STRING'])
+
 
 class Base(DeclarativeBase):
     pass
