@@ -11,6 +11,12 @@ services:
     volumes:
       - ../inline-provider:/app
 
+    environment:
+      REDIS_HOST: redis
+
+    links:
+      - redis
+
     ports:
       - "8080:8080"
 
@@ -43,6 +49,9 @@ services:
 
     environment:
       POSTGRES_PASSWORD: dev
+
+  redis:
+    image: redis
 
 
 volumes:
