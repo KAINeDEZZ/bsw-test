@@ -19,9 +19,6 @@ x-betmaker_base: &betmaker_base
     - line-provider
     - redis
 
-  ports:
-    - "8000:8000"
-
 services:
   line-provider:
     image: bsw-test-line-provider
@@ -42,6 +39,9 @@ services:
 
   bet-maker:
     <<: *betmaker_base
+
+    ports:
+      - "8000:8000"
 
   bet-maker-consumer:
     <<: *betmaker_base
