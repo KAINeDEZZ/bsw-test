@@ -2,6 +2,26 @@ version: "3.9"
 name: bsw-test
 
 
+x-betmaker_base: &betmaker_base
+  image: bsw-test-bet-maker
+  build:
+    context: ../bet-maker
+
+  volumes:
+    - ../bet-maker:/app
+
+  environment:
+    DB_CONNECTION_STRING: 'postgresql+psycopg2://postgres:dev@db:5432/postgres'
+    REDIS_HOST: 'redis'
+
+  links:
+    - db
+    - line-provider
+    - redis
+
+  ports:
+    - "8000:8000"
+
 services:
   line-provider:
     image: bsw-test-line-provider
@@ -21,22 +41,11 @@ services:
       - "8080:8080"
 
   bet-maker:
-    image: bsw-test-bet-maker
-    build:
-      context: ../bet-maker
+    <<: *betmaker_base
 
-    volumes:
-      - ../bet-maker:/app
-
-    environment:
-      DB_CONNECTION_STRING: 'postgresql+psycopg2://postgres:dev@db:5432/postgres'
-
-    links:
-      - db
-      - line-provider
-
-    ports:
-      - "8000:8000"
+  bet-maker-consumer:
+    <<: *betmaker_base
+    command: [ "consumer" ]
 
   db:
     image: postgres:16

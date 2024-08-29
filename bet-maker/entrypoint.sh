@@ -13,6 +13,9 @@ elif [ "$1" = "upgrade" ]; then
 elif [ "$1" = "revision" ]; then
   exec alembic revision --autogenerate
 
+elif [ "$1" = "consumer" ]; then
+  exec python consumer.py
+
 else
   echo "Custom command:"
   exec "$@"
