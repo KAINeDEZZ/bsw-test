@@ -5,6 +5,8 @@ from sqlalchemy.orm import Session
 from models import engine, Event
 
 
+# In this implementation of line-provider we dont need this command,
+# but if line-provider will be uses database it will be helpful
 def main():
     events = requests.get('http://line-provider:8080/events').json()
     print(f'Adding {len(events)} events')
